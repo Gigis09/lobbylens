@@ -1,0 +1,17 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Environment
+.env
+
+# Alembic
+alembic/versions/__pycache__/
+
+# Node / frontend (future)
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
