@@ -24,11 +24,11 @@ export default function Home() {
     loadCompanies("", 100);
   }, []);
 
-  async function loadCompanies(query = "") {
+  async function loadCompanies(query = "", limit = 100) {
     try {
       setIsLoading(true);
       setError("");
-      const data = await fetchCompanies(query);
+      const data = await fetchCompanies(query, limit);
       setCompanies(data);
     } catch (err) {
       console.error("Failed to load companies:", err);
@@ -38,26 +38,53 @@ export default function Home() {
     }
   }
 
+  useEffect(() => {
+    const query = searchValue.trim();
+
+    const timeoutId = setTimeout(() => {
+      if (query) {
+        loadCompanies(query, 100);
+      } else {
+        loadCompanies("", 100);
+      }
+    }, 250);
+
+    return () => clearTimeout(timeoutId);
+  }, [searchValue]);
+
+
   const companyNames = useMemo(() => {
     return companies.map((company) => company.name);
   }, [companies]);
 
-  const handleSearch = () => {
-    const selectedCompany = companies.find(
-      (c) => c.name.toLowerCase() === searchValue.toLowerCase(),
-    );
-
-    if (selectedCompany) {
-      setError("");
-      navigate(`/company/${selectedCompany.id}`);
-    } else {
-      setError(
-        `We couldn't find a company named "${searchValue}". Try picking one from the dropdown!`,
+ const handleSearch = async () => {
+    try {
+      let selectedCompany = companies.find(
+        (c) => c.name.toLowerCase() === searchValue.toLowerCase(),
       );
+
+      if (!selectedCompany && searchValue.trim()) {
+        const fallbackMatches = await fetchCompanies(searchValue, 100);
+        selectedCompany = fallbackMatches.find(
+          (c) => c.name.toLowerCase() === searchValue.toLowerCase(),
+        );
+      }
+
+      if (selectedCompany) {
+        setError("");
+        navigate(`/company/${selectedCompany.id}`);
+      } else {
+        setError(
+          `We couldn't find a company named "${searchValue}". Try picking one from the dropdown!`,
+        );
+      }
+    } catch (err) {
+      console.error("Failed to search companies:", err);
+      setError("Could not search companies right now. Please try again.");
     }
   };
 
-  const handleInputChange = async (value) => {
+  const handleInputChange = (value) => {
     setSearchValue(value);
   };
 
