@@ -38,7 +38,7 @@ export default function Home() {
         offset += page.length;
         hasMore = page.length === PAGE_SIZE;
       }
-     setCompanies(data);
+     setCompanies(allCompanies);
     } catch (err) {
       console.error("Failed to load companies:", err);
       setError("Could not connect to the database. Is the backend running?");
