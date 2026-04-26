@@ -26,10 +26,10 @@ export default function Home() {
 
   async function loadCompanies(query = "", limit = 100) {
     try {
-     setIsLoading(true);
+      setIsLoading(true);
       setError("");
       const data = await fetchCompanies(query, limit);
-     setCompanies(data);
+      setCompanies(data);
     } catch (err) {
       console.error("Failed to load companies:", err);
       setError("Could not connect to the database. Is the backend running?");
@@ -52,12 +52,11 @@ export default function Home() {
     return () => clearTimeout(timeoutId);
   }, [searchValue]);
 
-
   const companyNames = useMemo(() => {
     return companies.map((company) => company.name);
   }, [companies]);
 
- const handleSearch = async () => {
+  const handleSearch = async () => {
     try {
       let selectedCompany = companies.find(
         (c) => c.name.toLowerCase() === searchValue.toLowerCase(),
@@ -138,6 +137,16 @@ export default function Home() {
           Search
         </Button>
       </Group>
+
+      <Center mt="xl">
+        <Button 
+          variant="subtle" 
+          color="gray" 
+          onClick={() => navigate("/companies")}
+        >
+          Not sure what to search? Browse the full directory →
+        </Button>
+      </Center>
     </Container>
   );
 }
