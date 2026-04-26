@@ -21,15 +21,24 @@ export default function Home() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    loadCompanies("", 100);
+    loadCompanies();
   }, []);
 
-  async function loadCompanies(query = "", limit = 100) {
+  async function loadCompanies() {
     try {
       setIsLoading(true);
       setError("");
-      const data = await fetchCompanies(query, limit);
-      setCompanies(data);
+     const PAGE_SIZE = 500;
+     let offset = 0;
+     let hasMore = true;
+     const allCompanies = [];
+      while (hasMore) {
+        const page = await fetchCompanies("", PAGE_SIZE, offset);
+        allCompanies.push(...page);
+        offset += page.length;
+        hasMore = page.length === PAGE_SIZE;
+      }
+     setCompanies(Companies);
     } catch (err) {
       console.error("Failed to load companies:", err);
       setError("Could not connect to the database. Is the backend running?");
@@ -128,8 +137,8 @@ export default function Home() {
           value={searchValue}
           onChange={handleInputChange}
           style={{ flex: 1, maxWidth: 500 }}
-          limit={50}
-          maxDropdownHeight={300}
+          limit={Math.max(companyNames.length, 1}
+          maxDropdownHeight={320}
           onKeyDown={(e) => {
             if (e.key === "Enter") handleSearch();
           }}
