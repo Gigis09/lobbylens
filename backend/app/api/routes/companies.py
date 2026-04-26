@@ -7,8 +7,6 @@ from app.models.company import Company
 from app.schemas.company import CompanyOut
 
 router = APIRouter(prefix="/companies")
-
-@router.get("", response_model=list[CompanyOut])
 @router.get("", response_model=list[CompanyOut])
 def search_companies(
     query: str = Query("", min_length=0),
@@ -19,9 +17,7 @@ def search_companies(
 
     if query.strip():
         stmt = stmt.where(Company.name.ilike(f"%{query.strip()}%"))
-        stmt = stmt.limit(limit)
-    else:
-        stmt = stmt.limit(200)  # bigger default for homepage
+        stml = stml.limit.(limit)
 
     stmt = stmt.order_by(Company.name)
 
