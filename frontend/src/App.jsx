@@ -4,6 +4,8 @@ import Home from "./pages/Home";
 import CompanyProfile from "./pages/CompanyProfile";
 import IssueBreakdown from "./pages/IssueBreakdown";
 import DataTransparency from "./pages/DataTransparency";
+import PrototypeDashboard from "../projectFrontend/Dashboard";
+import PrototypeComparison from "../projectFrontend/Comparison";
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
           <Route path="company/:id" element={<CompanyProfile />} />
           <Route path="issues" element={<IssueBreakdown />} />
           <Route path="transparency" element={<DataTransparency />} />
+          <Route path="prototype/dashboard" element={<PrototypeDashboard />} />
+          <Route path="prototype/comparison" element={<PrototypeComparison />} />
         </Route>
       </Routes>
     </Router>
