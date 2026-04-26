@@ -4,8 +4,8 @@ import Home from "./pages/Home";
 import CompanyProfile from "./pages/CompanyProfile";
 import IssueBreakdown from "./pages/IssueBreakdown";
 import DataTransparency from "./pages/DataTransparency";
-import PrototypeDashboard from "../projectFrontend/Dashboard";
-import PrototypeComparison from "../projectFrontend/Comparison";
+import PrototypeDashboard from "../projectFrontend/Dashboard.jsx";
+import PrototypeComparison from "../projectFrontend/Comparison.jsx";
 
 function App() {
   return (
