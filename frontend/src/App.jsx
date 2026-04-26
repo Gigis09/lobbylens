@@ -18,6 +18,7 @@ function App() {
           <Route path="transparency" element={<DataTransparency />} />
           <Route path="prototype/dashboard" element={<PrototypeDashboard />} />
           <Route path="prototype/comparison" element={<PrototypeComparison />} />
+          <Route path="/companies" element={<CompanyDirectory />} />
         </Route>
       </Routes>
     </Router>
