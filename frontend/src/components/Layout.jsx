@@ -21,6 +21,12 @@ export default function Layout() {
             <Button component={Link} to="/transparency" variant="subtle">
               Transparency
             </Button>
+            <Button component={Link} to="/prototype/dashboard" variant="subtle">
+              Prototype Dashboard
+            </Button>
+            <Button component={Link} to="/prototype/comparison" variant="subtle">
+              Prototype Comparison
+            </Button>
           </Group>
         </Group>
       </AppShell.Header>
