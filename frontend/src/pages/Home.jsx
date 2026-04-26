@@ -21,7 +21,7 @@ export default function Home() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    loadCompanies();
+    loadCompanies("", 100);
   }, []);
 
   async function loadCompanies(query = "") {
