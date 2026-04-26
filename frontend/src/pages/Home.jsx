@@ -137,7 +137,7 @@ export default function Home() {
           value={searchValue}
           onChange={handleInputChange}
           style={{ flex: 1, maxWidth: 500 }}
-          limit={Math.max(companyNames.length, 1}
+          limit={Math.max(companyNames.length, 1)}
           maxDropdownHeight={320}
           onKeyDown={(e) => {
             if (e.key === "Enter") handleSearch();
