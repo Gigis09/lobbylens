@@ -9,10 +9,32 @@ export default function Comparison() {
   const [difference, setDifference] = useState(null);
   const [error, setError] = useState("");
 
-  React.useEffect(() => {
-    fetchCompanies("", 100).then((companies) => {
-      setOptions(companies.map((c) => ({ value: String(c.id), label: c.name })));
-    });
+ React.useEffect(() => {
+    const PAGE_SIZE = 500;
+
+    async function loadAllCompanies() {
+      try {
+        let offset = 0;
+        let hasMore = true;
+        const allCompanies = [];
+
+        while (hasMore) {
+          const page = await fetchCompanies("", PAGE_SIZE, offset);
+          allCompanies.push(...page);
+          offset += page.length;
+          hasMore = page.length === PAGE_SIZE;
+        }
+
+        setOptions(
+          allCompanies.map((c) => ({ value: String(c.id), label: c.name })),
+        );
+      } catch (err) {
+        console.error("Failed to load companies for comparison:", err);
+        setError("Could not load company list.");
+      }
+    }
+
+    loadAllCompanies();
   }, []);
 
   const handleCompare = async () => {
@@ -44,6 +66,8 @@ export default function Comparison() {
           value={companyA}
           onChange={setCompanyA}
           searchable
+          limit={Math.max(options.length, 1)}
+          maxDropdownHeight={320}
         />
         <Select
           placeholder="Select company B"
@@ -51,6 +75,8 @@ export default function Comparison() {
           value={companyB}
           onChange={setCompanyB}
           searchable
+          limit={Math.max(options.length, 1)}
+          maxDropdownHeight={320}
         />
       </Group>
 
