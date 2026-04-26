@@ -16,8 +16,8 @@ function App() {
           <Route path="company/:id" element={<CompanyProfile />} />
           <Route path="issues" element={<IssueBreakdown />} />
           <Route path="transparency" element={<DataTransparency />} />
-          <Route path="prototype/dashboard" element={<Dashboard />} />
-          <Route path="prototype/comparison" element={<Comparison />} />
+          <Route path="prototype/dashboard" element={<PrototypeDashboard />} />
+          <Route path="prototype/comparison" element={<PrototypeComparison />} />
         </Route>
       </Routes>
     </Router>
