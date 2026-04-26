@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+/* import React, { useState } from "react";
 import { compareCompanies } from "../api/api";
 
 export default function Comparison() {
@@ -26,4 +26,4 @@ return (
      ))}
   <\div>
   );
-}
+} */
