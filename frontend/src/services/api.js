@@ -1,7 +1,7 @@
 const API_BASE =  import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000";
 
 
-export async function fetchCompanies(query = "", limit = 500, offset = 0) {
+export async function fetchCompanies(query = "", limit = 1000, offset = 0) {
   const url = new URL(`${API_BASE}/companies`);
 
   if (query.trim()) {

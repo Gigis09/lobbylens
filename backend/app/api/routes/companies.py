@@ -10,7 +10,7 @@ router = APIRouter(prefix="/companies")
 @router.get("", response_model=list[CompanyOut])
 def search_companies(
     query: str = Query("", min_length=0),
-    limit: int = Query(100, ge=1, le=500),
+    limit: int = Query(1000, ge=1, le=2000),
     db: Session = Depends(get_db),
 ):
     stmt = select(Company)
