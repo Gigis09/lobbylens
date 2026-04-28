@@ -24,7 +24,7 @@ export default function Home() {
     loadCompanies("", 100);
   }, []);
 
-  async function loadCompanies(query = "", limit = 100) {
+  async function loadCompanies(query = "", limit = 1000) {
     try {
       setIsLoading(true);
       setError("");
@@ -43,9 +43,9 @@ export default function Home() {
 
     const timeoutId = setTimeout(() => {
       if (query) {
-        loadCompanies(query, 100);
+        loadCompanies(query, 1000);
       } else {
-        loadCompanies("", 100);
+        loadCompanies("", 1000);
       }
     }, 250);
 
@@ -63,7 +63,7 @@ export default function Home() {
       );
 
       if (!selectedCompany && searchValue.trim()) {
-        const fallbackMatches = await fetchCompanies(searchValue, 100);
+        const fallbackMatches = await fetchCompanies(searchValue, 1000);
         selectedCompany = fallbackMatches.find(
           (c) => c.name.toLowerCase() === searchValue.toLowerCase(),
         );

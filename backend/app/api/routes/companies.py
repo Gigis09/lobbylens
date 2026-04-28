@@ -17,9 +17,8 @@ def search_companies(
 
     if query.strip():
         stmt = stmt.where(Company.name.ilike(f"%{query.strip()}%"))
-        stml = stml.limit.(limit)
 
-    stmt = stmt.order_by(Company.name)
+    stmt = stmt.order_by(Company.name).limit(limit)
 
     return db.execute(stmt).scalars().all()
 @router.get("/{company_id}", response_model=CompanyOut)

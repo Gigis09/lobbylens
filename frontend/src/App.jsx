@@ -14,12 +14,12 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path="companies" element={<CompanyDirectory />} />
           <Route path="company/:id" element={<CompanyProfile />} />
           <Route path="issues" element={<IssueBreakdown />} />
           <Route path="transparency" element={<DataTransparency />} />
           <Route path="prototype/dashboard" element={<PrototypeDashboard />} />
           <Route path="prototype/comparison" element={<PrototypeComparison />} />
-          <Route path="companies" element={<CompanyDirectory />} />
         </Route>
       </Routes>
     </Router>
